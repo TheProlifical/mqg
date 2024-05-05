@@ -142,7 +142,7 @@ lol {
     }
     h1:not(#plzhelpiwannagohome) {
         position: absolute;
-        left: 50%;
+        left: 63%;
         top: 78.5%;
         transform: translateX(-75%) scale(1.3);
         font-size: 48px;
@@ -157,7 +157,7 @@ lol {
         flex-direction: column;
     }
     .card {
-        width: 65vw;
+        width: 86vw;
         margin: 0;
         padding: 20px;
     }
@@ -166,7 +166,7 @@ lol {
         font-size: 72px;
         top: 100%;
         position: absolute;
-        left: -11%;
+        left: 2%;
         transform: scale(0.7);
         text-align: center;
         width: 120%;
