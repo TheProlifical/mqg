@@ -70,6 +70,7 @@ ul li:hover {
     }
     .bold {
         padding: 6.1px;
+        display: none;
     }
 
     .navbar li {
