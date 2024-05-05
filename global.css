@@ -70,6 +70,9 @@ ul li:hover {
         width: auto;
         justify-content: center;
     }
+    body {
+        width: 80vw;
+    }
     .bold {
         padding: 6.1px;
         display: none;
