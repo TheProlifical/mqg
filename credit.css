@@ -1,0 +1,34 @@
+h1, h2 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content; 
+    font-family: 'Poppins';
+}
+
+h1 {
+    top: 20%;
+    font-size: 72px;
+}
+
+h2 {
+    padding-top: 185px;
+    text-align: center;
+    font-size: 42px;
+    width: 80%;
+}
+
+@media only screen and (max-width: 900px) {
+    h2 {
+        padding-top: 223px;
+        text-align: center;
+        font-size: 42px;
+        width: fit-content;
+    }
+    body {
+        height: 120vh;
+    }
+}
+body {
+    overflow: hidden;
+}

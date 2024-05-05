@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practice Quiz</title>
+  <link rel="stylesheet" href="global.css">
+  <link rel="stylesheet" href="practice.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script src="vc.js"></script>
+
+
+</head>
+<body>
+  <div class="navbar" id="nav">
+    <li><a class="bold">MQG.</a></li>
+    <div class="nav-content">
+      <ul>
+        <li><a href="./index.html">home</a></li>
+        <li><a href="./practice.html#+by99">practice</a></li>
+        <li><a href="./credit.html">more</a></li>
+      </ul>
+    </div>
+  </div>
+  <audio id="bg-music" src="./sagun - worst day.mp3" loop></audio>
+
+  <!-- Custom button to control playback -->
+  <button id="playButton">🔊</button>
+
+  <h1 id="question"></h1>
+  <form id="answerForm">
+    <input type="text" autocomplete="off" id="answerInput" placeholder="000">
+    <button type="submit" id="submitButton">Submit Answer</button>
+  </form>
+  <div class="links">
+    <li><a href="./practice.html#+by99">Addition</a></li>
+    <li><a href="./practice.html#-by99">Subtraction</a></li>
+    <li><a href="./practice.html#allby99">All operations</a></li>
+    <li><a href="./practice.html#xby99">Multiplication</a></li>
+    <li><a href="./practice.html#/by99">Division</a></li>
+  </div>
+
+  <p>For answers with decimals, write only till 2nd place.</p>
+
+
+</body>
+</html>
+<script>
+window.addEventListener("hashchange", function() {
+  window.location.reload(); // Reload the page on hash change
+});
+
+</script>
+<script>
+const questionEl = $("#question");
+const answerInput = $("#answerInput");
+const answerForm = $("#answerForm");
+
+let currentQuestion;
+let correctAnswer;
+let scoreCorrect = 0;
+let scoreTotal = 0;
+let totalTime = 0;
+let questionStartTime;
+
+const scoreDisplay = $("<div>").appendTo("body");
+const timeDisplay = $("<div>").appendTo("body");
+
+function generateQuestion() {
+  const urlParts = window.location.href.split("#");
+  const hashParams = urlParts[1] ? urlParts[1].split("by") : [];
+
+  if (hashParams.length !== 2 || isNaN(parseInt(hashParams[1]))) {
+    questionEl.text("Invalid URL parameters. Please use format: practice.html#<operation>by<maxNumber>");
+    return;
+  }
+
+  let operation = hashParams[0];
+  const maxNumber = parseInt(hashParams[1]);
+
+  const generateNumbers = () => Math.floor(Math.random() * maxNumber) + 1;
+
+  if (operation === "all") {
+    const operations = Object.keys(operators);
+    operation = operations[Math.floor(Math.random() * operations.length)];
+  }
+
+  let num1 = generateNumbers();
+  let num2 = generateNumbers();
+
+  currentQuestion = `${num1} ${operation} ${num2}`;
+  correctAnswer = operators[operation](num1, num2);
+
+  if (operation === "/") {
+    correctAnswer = Math.round(correctAnswer * 100) / 100;
+  }
+
+  questionEl.text(currentQuestion).hide().fadeIn(500);
+  answerInput.val("").hide().fadeIn(500);
+  questionStartTime = new Date();
+}
+
+const operators = {
+  "x": (num1, num2) => num1 * num2,
+  "/": (num1, num2) => (num2 !== 0 ? num1 / num2 : "Division by zero is not allowed"),
+  "+": (num1, num2) => num1 + num2,
+  "-": (num1, num2) => num1 - num2,
+};
+
+answerForm.on("submit", function (event) {
+  event.preventDefault();
+
+  const userAnswer = answerInput.val();
+  questionEl.removeClass("incorrect correct");
+
+  if (userAnswer === String(correctAnswer)) {
+    questionEl.addClass("correct").text("Correct!").animate({ fontSize: "70px" }, 300);
+    scoreCorrect++;
+  } else {
+    questionEl.addClass("incorrect").text(`Incorrect. ${correctAnswer}`).animate({ fontSize: "70px" }, 300);
+  }
+
+  scoreTotal++;
+
+  const questionEndTime = new Date();
+  const timeTaken = (questionEndTime - questionStartTime) / 1000;
+  totalTime += timeTaken;
+  const averageTime = totalTime / scoreTotal;
+
+  timeDisplay.text(`Time: Last: ${timeTaken.toFixed(2)}s, Average: ${averageTime.toFixed(2)}s`).hide().fadeIn(500);
+
+  setTimeout(() => {
+    generateQuestion();
+  }, 300);
+
+  const accuracy = (scoreCorrect / scoreTotal) * 100;
+  scoreDisplay.text(`Score: Correct: ${scoreCorrect}, Incorrect: ${scoreTotal - scoreCorrect}, Accuracy: ${accuracy.toFixed(2)}%`).hide().fadeIn(500);
+});
+
+generateQuestion();
+
+</script>
+<script>
+$(document).ready(function () {
+    // Hide the body initially
+    $('body').hide();
+
+    // Fade in the body with a duration of 1000 milliseconds (1 second)
+    $('body').fadeIn(1000);
+});
+
+</script>
