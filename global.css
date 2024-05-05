@@ -67,6 +67,8 @@ ul li:hover {
 @media only screen and (max-width: 900px) {
     .navbar {
         margin: 0;
+        width: 50%;
+        justify-content: center;
     }
     .bold {
         padding: 6.1px;
