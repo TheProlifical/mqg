@@ -152,7 +152,7 @@ lol {
         display: flex;
         justify-content: space-around;
         position: absolute;
-        top: 108%;
+        top: 114%;
         font-family: 'Poppins' !important;
         flex-direction: column;
     }
