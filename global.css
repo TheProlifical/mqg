@@ -74,9 +74,6 @@ ul li:hover {
         padding: 6.1px;
         display: none;
     }
-    body > div.links > li:nth-child(3) > a {
-        display: none;
-    }
     .navbar li {
         width: initial;
         padding: 1.1px;
