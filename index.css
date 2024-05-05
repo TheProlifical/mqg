@@ -170,6 +170,8 @@ lol {
         transform: scale(0.7);
         text-align: center;
         width: 120%;
+    }        
+    .bold {
+        display: none;
     }
-
 }
