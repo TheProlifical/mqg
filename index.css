@@ -166,7 +166,7 @@ lol {
         font-size: 72px;
         top: 100%;
         position: absolute;
-        left: 2%;
+        left: -10%;
         transform: scale(0.7);
         text-align: center;
         width: 120%;
